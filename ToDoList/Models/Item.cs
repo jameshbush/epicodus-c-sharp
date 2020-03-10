@@ -1,34 +1,53 @@
 using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 
 namespace ToDoList.Models
 {
   public class Item
   {
-    private static readonly List<Item> _instances = new List<Item>();
-
     public Item(string description)
     {
       Description = description;
-      _instances.Add(this);
-      Id = _instances.Count;
+    }
+
+    private Item()
+    {
     }
 
     public string Description { get; set; }
-    public int Id { get; }
+    public int Id { get; set; }
 
     public static List<Item> GetAll()
     {
-      return _instances;
+      var allItems = new List<Item>();
+      var conn = Db.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand();
+      cmd.CommandText = @"select * from items;";
+      var rdr = cmd.ExecuteReader();
+      while (rdr.Read())
+      {
+        allItems.Add(new Item
+        {
+          Id = rdr.GetInt32(0),
+          Description = rdr.GetString(1)
+        });
+      }
+
+      conn.Close();
+
+      conn?.Dispose();
+
+      return allItems;
     }
 
     public static void ClearAll()
     {
-      _instances.Clear();
     }
 
     public static Item Find(int searchId)
     {
-      return _instances[searchId - 1];
+      return new Item("placeholder item");
     }
   }
 }

@@ -3,5 +3,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="MySqlConnector" Version="0.62.0" />
   </ItemGroup>
 </Project>
