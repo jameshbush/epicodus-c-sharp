@@ -8,7 +8,6 @@ namespace ToDoList.Tests
   [TestClass]
   public class CategoryTest : IDisposable
   {
-
     public void Dispose()
     {
       Category.ClearAll();
@@ -57,7 +56,7 @@ namespace ToDoList.Tests
       string name02 = "School";
       Category newCategory1 = new Category(name01);
       Category newCategory2 = new Category(name02);
-      List<Category> newList = new List<Category> { newCategory1, newCategory2 };
+      List<Category> newList = new List<Category> {newCategory1, newCategory2};
 
       //Act
       List<Category> result = Category.GetAll();
@@ -88,7 +87,7 @@ namespace ToDoList.Tests
       //Arrange
       string description = "Walk the dog.";
       Item newItem = new Item(description);
-      List<Item> newList = new List<Item> { newItem };
+      List<Item> newList = new List<Item> {newItem};
       string name = "Work";
       Category newCategory = new Category(name);
       newCategory.AddItem(newItem);

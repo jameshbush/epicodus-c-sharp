@@ -10,8 +10,8 @@ namespace ToDoList
     public Startup(IHostEnvironment env)
     {
       var builder = new ConfigurationBuilder()
-          .SetBasePath(env.ContentRootPath)
-          .AddEnvironmentVariables();
+        .SetBasePath(env.ContentRootPath)
+        .AddEnvironmentVariables();
       Configuration = builder.Build();
     }
 
