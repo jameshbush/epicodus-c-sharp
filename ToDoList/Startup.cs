@@ -1,14 +1,13 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace ToDoList
 {
   public class Startup
   {
-    public Startup(IHostingEnvironment env)
+    public Startup(IHostEnvironment env)
     {
       var builder = new ConfigurationBuilder()
           .SetBasePath(env.ContentRootPath)
@@ -20,7 +19,8 @@ namespace ToDoList
 
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMvc();
+      services.AddControllersWithViews();
+      services.AddRazorPages();
     }
 
     public void Configure(IApplicationBuilder app)
@@ -29,18 +29,13 @@ namespace ToDoList
 
       app.UseDeveloperExceptionPage();
 
-      app.UseMvc(routes =>
-      {
-        routes.MapRoute(
-          name: "default",
-          template: "{controller=Home}/{action=Index}/{id?}");
-      });
+      app.UseRouting();
 
-      app.Run(async (context) =>
+      app.UseEndpoints(endpoints =>
       {
-        await context.Response.WriteAsync("Something went wrong!");
+        endpoints.MapControllers();
+        endpoints.MapRazorPages();
       });
-
     }
   }
 }
