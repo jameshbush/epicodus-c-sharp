@@ -1,7 +1,7 @@
+using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ToDoList.Models;
-using System.Collections.Generic;
-using System;
 
 namespace ToDoList.Tests
 {
@@ -16,7 +16,7 @@ namespace ToDoList.Tests
     [TestMethod]
     public void CategoryConstructor_CreatesInstanceOfCategory_Category()
     {
-      Category newCategory = new Category("test category");
+      var newCategory = new Category("test category");
       Assert.AreEqual(typeof(Category), newCategory.GetType());
     }
 
@@ -24,11 +24,11 @@ namespace ToDoList.Tests
     public void GetName_ReturnsName_String()
     {
       //Arrange
-      string name = "Test Category";
-      Category newCategory = new Category(name);
+      var name = "Test Category";
+      var newCategory = new Category(name);
 
       //Act
-      string result = newCategory.Name;
+      var result = newCategory.Name;
 
       //Assert
       Assert.AreEqual(name, result);
@@ -38,11 +38,11 @@ namespace ToDoList.Tests
     public void GetId_ReturnsCategoryId_Int()
     {
       //Arrange
-      string name = "Test Category";
-      Category newCategory = new Category(name);
+      var name = "Test Category";
+      var newCategory = new Category(name);
 
       //Act
-      int result = newCategory.Id;
+      var result = newCategory.Id;
 
       //Assert
       Assert.AreEqual(1, result);
@@ -52,14 +52,14 @@ namespace ToDoList.Tests
     public void GetAll_ReturnsAllCategoryObjects_CategoryList()
     {
       //Arrange
-      string name01 = "Work";
-      string name02 = "School";
-      Category newCategory1 = new Category(name01);
-      Category newCategory2 = new Category(name02);
-      List<Category> newList = new List<Category> {newCategory1, newCategory2};
+      var name01 = "Work";
+      var name02 = "School";
+      var newCategory1 = new Category(name01);
+      var newCategory2 = new Category(name02);
+      var newList = new List<Category> {newCategory1, newCategory2};
 
       //Act
-      List<Category> result = Category.GetAll();
+      var result = Category.GetAll();
 
       //Assert
       CollectionAssert.AreEqual(newList, result);
@@ -69,13 +69,13 @@ namespace ToDoList.Tests
     public void Find_ReturnsCorrectCategory_Category()
     {
       //Arrange
-      string name01 = "Work";
-      string name02 = "School";
-      Category newCategory1 = new Category(name01);
-      Category newCategory2 = new Category(name02);
+      var name01 = "Work";
+      var name02 = "School";
+      var newCategory1 = new Category(name01);
+      var newCategory2 = new Category(name02);
 
       //Act
-      Category result = Category.Find(2);
+      var result = Category.Find(2);
 
       //Assert
       Assert.AreEqual(newCategory2, result);
@@ -85,15 +85,15 @@ namespace ToDoList.Tests
     public void AddItem_AssociatesItemWithCategory_ItemList()
     {
       //Arrange
-      string description = "Walk the dog.";
-      Item newItem = new Item(description);
-      List<Item> newList = new List<Item> {newItem};
-      string name = "Work";
-      Category newCategory = new Category(name);
+      var description = "Walk the dog.";
+      var newItem = new Item(description);
+      var newList = new List<Item> {newItem};
+      var name = "Work";
+      var newCategory = new Category(name);
       newCategory.AddItem(newItem);
 
       //Act
-      List<Item> result = newCategory.Items;
+      var result = newCategory.Items;
 
       //Assert
       CollectionAssert.AreEqual(newList, result);

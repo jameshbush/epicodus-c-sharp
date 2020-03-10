@@ -22,7 +22,7 @@ namespace ToDoList.Controllers
     [HttpPost("/categories")]
     public ActionResult Create(string categoryName)
     {
-      Category newCategory = new Category(categoryName);
+      var newCategory = new Category(categoryName);
       return RedirectToAction("Index");
     }
 

@@ -4,9 +4,7 @@ namespace ToDoList.Models
 {
   public class Item
   {
-    public string Description { get; set; }
-    public int Id { get; }
-    private static List<Item> _instances = new List<Item> { };
+    private static readonly List<Item> _instances = new List<Item>();
 
     public Item(string description)
     {
@@ -14,6 +12,9 @@ namespace ToDoList.Models
       _instances.Add(this);
       Id = _instances.Count;
     }
+
+    public string Description { get; set; }
+    public int Id { get; }
 
     public static List<Item> GetAll()
     {
