@@ -16,8 +16,7 @@ namespace ToDoList.Tests
 
     public ItemTest()
     {
-      // TODO: change db to test
-      ConnectionString = "server=localhost;user id=root;password=pw;port=3306;database=to_do_list;";
+      ConnectionString = "User ID=root; Password=pw; Host=localhost; Port=3306; Database=to_do_list;";
     }
 
     [TestMethod]

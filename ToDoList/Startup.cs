@@ -41,6 +41,6 @@ namespace ToDoList
 
   public static class DbConfiguration
   {
-    public static string ConnectionString = "Server=localhost;user id=root;password=pw;port=336;database=to_do_list";
+    public static string ConnectionString = "User ID=root; Password=pw; Host=localhost; Port=3306; Database=to_do_list;";
   }
 }
