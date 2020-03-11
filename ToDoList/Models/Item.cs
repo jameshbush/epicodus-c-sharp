@@ -76,9 +76,27 @@ namespace ToDoList.Models
       conn?.Dispose();
     }
 
-    public static Item Find(int searchId)
+    public static Item Find(long id)
     {
-      return new Item("placeholder item");
+      var conn = Db.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand();
+      cmd.CommandText = @"select * from `items` where id = @thisId;";
+      var thisId = new MySqlParameter {ParameterName = "@thisId", Value = id};
+      cmd.Parameters.Add(thisId);
+      var rdr = cmd.ExecuteReader();
+      var itemId = 0;
+      var itemDescription = "";
+      while (rdr.Read())
+      {
+        itemId = rdr.GetInt32(0);
+        itemDescription = rdr.GetString(1);
+      }
+
+      conn.Close();
+      conn?.Dispose();
+
+      return new Item {Description = itemDescription, Id = itemId};
     }
   }
 }
