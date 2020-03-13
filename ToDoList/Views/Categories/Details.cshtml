@@ -1,0 +1,11 @@
+@model ToDoList.Models.Category
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Category</h2>
+<p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</p>
+
+<p>@Html.ActionLink("Edit category", "Edit", new {id = Model.CategoryId})</p>
+<p>@Html.ActionLink("Delete category", "Delete", new {id = Model.CategoryId})</p>

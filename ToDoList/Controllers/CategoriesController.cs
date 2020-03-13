@@ -1,55 +1,69 @@
-using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers
 {
   public class CategoriesController : Controller
   {
+    private readonly ToDoListContext _db;
+
+    public CategoriesController(ToDoListContext db) => _db = db;
+
     [HttpGet("/categories")]
     public ActionResult Index()
     {
-      var allCategories = Category.GetAll();
-      return View(allCategories);
+      return View(_db.Categories.ToList());
     }
 
-    [HttpGet("/categories/new")]
-    public ActionResult New()
+    [HttpGet("/categories/create")]
+    public ActionResult Create()
     {
-      return View();
+      return View("Create");
     }
 
-    [HttpPost("/categories")]
-    public ActionResult Create(string categoryName)
+    [HttpPost("/categories/create")]
+    public ActionResult Create(Category category)
     {
-      var newCategory = new Category(categoryName);
+      _db.Categories.Add(category);
+      _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
-    [HttpGet("/categories/{id}")]
-    public ActionResult Show(int id)
+    [HttpGet("categories/{id}")]
+    public ActionResult Details(long id)
     {
-      var model = new Dictionary<string, object>();
-      var selectedCategory = Category.Find(id);
-      var categoryItems = selectedCategory.Items;
-      model.Add("category", selectedCategory);
-      model.Add("items", categoryItems);
-      return View(model);
+      return View(_db.Categories.FirstOrDefault(category => category.CategoryId == id));
     }
 
-    // This one creates new Items within a given Category, not new Categories:
-    [HttpPost("/categories/{categoryId}/items")]
-    public ActionResult Create(int categoryId, string itemDescription)
+    [HttpGet("categories/{id}/edit")]
+    public ActionResult Edit(long id)
     {
-      var model = new Dictionary<string, object>();
-      var foundCategory = Category.Find(categoryId);
-      var newItem = new Item(itemDescription);
-      newItem.Save();
-      foundCategory.AddItem(newItem);
-      var categoryItems = foundCategory.Items;
-      model.Add("items", categoryItems);
-      model.Add("category", foundCategory);
-      return View("Show", model);
+      return View(_db.Categories.FirstOrDefault(category => category.CategoryId == id));
+    }
+
+    [HttpPost("categories/{id}/edit")]
+    public ActionResult Edit(Category category)
+    {
+      _db.Entry(category).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    [HttpGet("/categories/{id}/delete")]
+    public ActionResult Delete(long id)
+    {
+      return View(_db.Categories.FirstOrDefault(category => category.CategoryId == id));
+    }
+
+    [HttpPost("/categories/{id}/delete"), ActionName("Delete")]
+    public ActionResult DeleteConfirmed(long id)
+    {
+      var category = _db.Categories.FirstOrDefault(c => c.CategoryId == id);
+      _db.Categories.Remove(category);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }

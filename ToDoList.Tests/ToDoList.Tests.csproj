@@ -4,14 +4,19 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="1.2" />
-    <PackageReference Include="MySqlConnector" Version="0.62.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ToDoList\ToDoList.csproj" />  
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages" />
   </ItemGroup>
 
 </Project>

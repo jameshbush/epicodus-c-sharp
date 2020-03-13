@@ -1,0 +1,14 @@
+@model ToDoList.Models.Category
+
+@{
+    Layout = "_Layout";
+}
+
+<h2>Are you sure you want to delete category @Html.ValueFor(model => model.Name)?</h2>
+<p>@Html.ActionLink("No go back to category", "Details", new {id = Model.CategoryId})</p>
+
+<p>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<p>
+@using (Html.BeginForm())
+{
+    <input type="submit" value="delete"/>
+}
