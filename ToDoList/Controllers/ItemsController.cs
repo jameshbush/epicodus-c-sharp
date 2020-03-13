@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using ToDoList.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ToDoList.Models;
 
 namespace ToDoList.Controllers
 {
@@ -10,7 +10,10 @@ namespace ToDoList.Controllers
   {
     private readonly ToDoListContext _db;
 
-    public ItemsController(ToDoListContext db) => _db = db;
+    public ItemsController(ToDoListContext db)
+    {
+      _db = db;
+    }
 
     [HttpGet("/items")]
     public ActionResult Index()
@@ -73,7 +76,8 @@ namespace ToDoList.Controllers
       return View(thisItem);
     }
 
-    [HttpPost("/items/{id}/destroy"), ActionName("Delete")]
+    [HttpPost("/items/{id}/destroy")]
+    [ActionName("Delete")]
     public ActionResult DeleteConfirmed(long id)
     {
       var thisItem = _db.Items.FirstOrDefault(item => item.ItemId == id);

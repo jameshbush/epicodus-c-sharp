@@ -9,7 +9,10 @@ namespace ToDoList.Controllers
   {
     private readonly ToDoListContext _db;
 
-    public CategoriesController(ToDoListContext db) => _db = db;
+    public CategoriesController(ToDoListContext db)
+    {
+      _db = db;
+    }
 
     [HttpGet("/categories")]
     public ActionResult Index()
@@ -57,7 +60,8 @@ namespace ToDoList.Controllers
       return View(_db.Categories.FirstOrDefault(category => category.CategoryId == id));
     }
 
-    [HttpPost("/categories/{id}/delete"), ActionName("Delete")]
+    [HttpPost("/categories/{id}/delete")]
+    [ActionName("Delete")]
     public ActionResult DeleteConfirmed(long id)
     {
       var category = _db.Categories.FirstOrDefault(c => c.CategoryId == id);
