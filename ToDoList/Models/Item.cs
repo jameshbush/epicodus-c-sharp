@@ -11,7 +11,6 @@ namespace ToDoList.Models
 
     public long ItemId { get; set; }
     public string Description { get; set; }
-    public long CategoryId { get; set; }
-    public ICollection<CategoryItem> Categories { get; }
+    public ICollection<CategoryItem> Categories { get; } // this "collection navigation property" doesn't need to be virtual/lazy
   }
 }

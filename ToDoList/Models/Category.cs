@@ -13,6 +13,7 @@ namespace ToDoList.Models
 
     public long CategoryId { get; set; }
     public string Name { get; set; }
-    public virtual ICollection<CategoryItem> Items { get; set; } // virtual allows lazy loading associations
+    public virtual ICollection<CategoryItem> Items { get; set; }
+    // "virtual" allows lazy loading associated "collection navigation property"
   }
 }
