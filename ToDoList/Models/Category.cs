@@ -8,11 +8,11 @@ namespace ToDoList.Models
 
     public Category()
     {
-      Items = new HashSet<Item>();
+      Items = new HashSet<CategoryItem>();
     }
 
     public long CategoryId { get; set; }
     public string Name { get; set; }
-    public virtual ICollection<Item> Items { get; set; } // virtual allows lazy loading associations
+    public virtual ICollection<CategoryItem> Items { get; set; } // virtual allows lazy loading associations
   }
 }
