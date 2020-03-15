@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
@@ -15,7 +15,7 @@ namespace ToDoList.Models
         .Build();
 
       var builder = new DbContextOptionsBuilder<ToDoListContext>();
-      var connectionString = configuration.GetConnectionString("Default Connection");
+      var connectionString = configuration.GetConnectionString("DefaultConnection");
 
       builder.UseMySql(connectionString);
 
