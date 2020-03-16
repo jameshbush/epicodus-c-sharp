@@ -37,7 +37,11 @@ namespace ToDoList.Controllers
     [HttpGet("categories/{id}")]
     public ActionResult Details(long id)
     {
-      return View(_db.Categories.FirstOrDefault(category => category.CategoryId == id));
+      var category = _db.Categories
+        .Include(c => c.Items)
+        .ThenInclude(join => join.Item)
+        .FirstOrDefault(c => c.CategoryId == id);
+      return View(category);
     }
 
     [HttpGet("categories/{id}/edit")]
